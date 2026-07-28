@@ -1,0 +1,187 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "@fontsource/sora/400.css";
+@import "@fontsource/sora/600.css";
+@import "@fontsource/sora/700.css";
+@import "@fontsource/sora/800.css";
+@import "@fontsource/manrope/400.css";
+@import "@fontsource/manrope/500.css";
+@import "@fontsource/manrope/600.css";
+@import "@fontsource/manrope/700.css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --font-display: "Sora", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Manrope", ui-sans-serif, system-ui, sans-serif;
+
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 12px);
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --color-blaze: var(--blaze);
+  --color-ember: var(--ember);
+  --color-amber: var(--amber);
+  --color-magenta: var(--magenta);
+  --color-violet: var(--violet);
+  --color-ink: var(--ink);
+  --color-cream: var(--cream);
+}
+
+:root {
+  --radius: 1rem;
+
+  /* Sunset Blaze palette */
+  --blaze: oklch(0.71 0.19 40);
+  /* #ff6b35 */
+  --ember: oklch(0.77 0.17 60);
+  /* #f7931e */
+  --amber: oklch(0.86 0.15 85);
+  --magenta: oklch(0.63 0.24 350);
+  /* #e84393 */
+  --violet: oklch(0.55 0.23 290);
+  /* #6c5ce7 */
+  --ink: oklch(0.16 0.03 300);
+  --cream: oklch(0.985 0.01 80);
+
+  --background: var(--cream);
+  --foreground: var(--ink);
+  --card: oklch(1 0 0);
+  --card-foreground: var(--ink);
+  --popover: oklch(1 0 0);
+  --popover-foreground: var(--ink);
+  --primary: var(--blaze);
+  --primary-foreground: oklch(1 0 0);
+  --secondary: oklch(0.96 0.02 60);
+  --secondary-foreground: var(--ink);
+  --muted: oklch(0.95 0.015 60);
+  --muted-foreground: oklch(0.5 0.03 300);
+  --accent: var(--magenta);
+  --accent-foreground: oklch(1 0 0);
+  --destructive: oklch(0.6 0.24 25);
+  --destructive-foreground: oklch(1 0 0);
+  --border: oklch(0.9 0.02 60);
+  --input: oklch(0.9 0.02 60);
+  --ring: var(--blaze);
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+
+  html {
+    font-family: var(--font-sans);
+  }
+
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5 {
+    font-family: var(--font-display);
+    letter-spacing: -0.02em;
+  }
+}
+
+@utility text-gradient-blaze {
+  background: linear-gradient(100deg, var(--blaze) 0%, var(--magenta) 55%, var(--violet) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+@utility bg-blaze-gradient {
+  background: linear-gradient(135deg, var(--blaze) 0%, var(--magenta) 100%);
+}
+
+@utility bg-sunset-gradient {
+  background: linear-gradient(135deg, var(--ember) 0%, var(--blaze) 50%, var(--magenta) 100%);
+}
+
+@utility bg-violet-gradient {
+  background: linear-gradient(135deg, var(--magenta) 0%, var(--violet) 100%);
+}
+
+@utility bg-amber-gradient {
+  background: linear-gradient(135deg, var(--amber) 0%, var(--ember) 100%);
+}
+
+@utility bg-ink-gradient {
+  background: linear-gradient(135deg, oklch(0.22 0.05 300) 0%, var(--ink) 100%);
+}
+
+@utility shadow-deal {
+  box-shadow: 0 20px 45px -20px color-mix(in oklab, var(--blaze) 45%, transparent);
+}
+
+@utility shadow-deal-lg {
+  box-shadow: 0 30px 70px -25px color-mix(in oklab, var(--magenta) 50%, transparent);
+}
+
+@utility noise {
+  background-image: radial-gradient(circle at 1px 1px, oklch(1 0 0 / 0.15) 1px, transparent 0);
+  background-size: 14px 14px;
+}
+
+/* ------------------------------------------------------------------ */
+/* Scrolling promo strip (marquee).                                    */
+/* Two identical copies sit side by side; shifting the track left by   */
+/* exactly 50% swaps one copy for the other, so the loop is seamless.  */
+/* ------------------------------------------------------------------ */
+@keyframes marquee-scroll {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.marquee-track {
+  animation: marquee-scroll 30s linear infinite;
+  will-change: transform;
+}
+
+/* Pause on hover so a line can be read. */
+.marquee-track:hover {
+  animation-play-state: paused;
+}
+
+/* Respect reduced-motion preference. */
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track {
+    animation: none;
+  }
+}
